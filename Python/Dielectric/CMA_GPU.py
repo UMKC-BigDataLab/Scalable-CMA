@@ -8,12 +8,6 @@ import cupy as cp
 import logging
 
 
-# disable the warnings
-logging.getLogger('tensorflow').disabled = True
-os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
-
-os.environ['PYSPARK_PYTHON'] = sys.executable
-
 mempool = cp.get_default_memory_pool()
 pinned_mempool = cp.get_default_pinned_memory_pool()
 
@@ -38,11 +32,13 @@ matrix_a = np.transpose(matrix_a)
 matrix_b = np.transpose(matrix_b)
 matrix_b = np.multiply(matrix_b, 1j)
 matrix_c = matrix_a + matrix_b
-	# slice matrix Z
+
+# slice matrix Z
 ZEE = matrix_c[:int(num_cols/2), :int(num_cols/2)]
 ZEH = matrix_c[:int(num_cols/2), int(num_cols/2):]
 ZHE = matrix_c[int(num_cols/2):, :int(num_cols/2)]
 ZHH = matrix_c[int(num_cols/2):, int(num_cols/2):]
+	
 	# ====   ZZ=ZEE-ZEH*inv(ZHH)*ZHE =====
 ZHH = cp.array(ZHH)
 ZHHinv = cp.linalg.inv(ZHH)
@@ -133,5 +129,5 @@ IC = cp.asnumpy(IC)
 DD = cp.asnumpy(DD)
 pd.DataFrame(IC).to_csv(outpath + '/GPUIC.csv',header=None,index=None)
 pd.DataFrame(DD).to_csv(outpath + '/GPUDD.csv',header=None,index=None)
-#print(line.rstrip())
+
 quit()
