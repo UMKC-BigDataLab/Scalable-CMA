@@ -1,5 +1,5 @@
 # Scalable-CMA
-Scalable Characteristic Mode Analysis
+Scalable Characteristic Mode Analysis CMA
 
 ## Summary
 
