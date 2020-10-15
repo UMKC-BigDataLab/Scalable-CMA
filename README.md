@@ -1,5 +1,4 @@
 # Scalable-CMA
 Scalable Characteristic Mode Analysis
 
-
-This repo for scalable CMA using big data techniques
+The goal of this project is to build a scalable Characteristic Mode Analysis (CMA).
